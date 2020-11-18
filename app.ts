@@ -1,15 +1,46 @@
-function add(n1: number, n2: number, showResult: boolean, phrase: string) {
-    // console.log(typeof n1);
-    let result = n1 + n2;
-	if (showResult) {
-		console.log(phrase + result);
-	}
+// const person: {
+//     name: string;
+//     age: number;
+// } = {
+//     name: 'Jonathan',
+//     age: 31
+// }
+
+// const person: {
+// 	name: string;
+// 	age: number;
+// 	hobbies: string[];
+// 	role: [number, string];
+// } = {
+// 	name: 'Jonathan',
+// 	age: 31,
+// 	hobbies: [ 'skydiving', 'flying' ],
+// 	role: [ 2, 'author' ]
+// };
+
+//possible action
+// person.role.push('admin');
+// person.role[1] = 4;
+
+enum Role {
+    ADMIN = 'admin',
+    READ_ONLY = 133,
+    AUTHOR = 144
 }
 
-const number1 = 5;
-const number2 = 2.8;
-const printResult = typeof number1 === 'number' && typeof number2 === 'number';
-const phrase = 'Result is ';
+const person = {
+	name: 'Jonathan',
+	age: 31,
+	hobbies: [ 'skydiving', 'flying' ],
+	role: 0
+};
 
-const result = add(number1, number2, printResult, phrase);
-console.log(result);
+let activities: string[];
+activities = [ 'cooking' ];
+
+console.log(person.name);
+
+for (const hobby of person.hobbies) {
+	console.log(hobby.toUpperCase());
+	// console.log(hobby.map())
+}
