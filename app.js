@@ -1,21 +1,19 @@
-function combine(input1, input2, resultType) {
-    var result;
-    if (typeof input1 === 'number' && typeof input2 === 'number' || resultType === 'asNumber') {
-        result = +input1 + +input2;
-    }
-    else {
-        result = input1.toString() + input2.toString();
-    }
-    return result;
-    // if (resultType === 'asNumber') {
-    //     return +result;
-    // } else {
-    //     return result.toString();
-    // }
-}
-var combinedAges = combine(30, 26, 'asNumber');
-console.log(combinedAges);
-var namesAsNumbers = combine('Max', 'Anna', 'asText');
-console.log(namesAsNumbers);
-var combinedNames = combine('Max', 'Anna', 'asText');
-console.log(combinedNames);
+var addTwo = function (n1, n2) {
+    return n1 + n2;
+};
+var printingResult = function (num) {
+    console.log('Result: ' + num);
+};
+var addAndHandle = function (n1, n2, cb) {
+    var result = n1 + n2;
+    cb(result);
+};
+console.log(printingResult(addTwo(5, 12))); // prints 'undefined'
+var combinedValues;
+combinedValues = addTwo;
+// combinedValues = printingResult; // throws error
+console.log(combinedValues(8, 8));
+// let someValue: undefined; // valid type
+addAndHandle(10, 20, function (result) {
+    console.log(result);
+});
