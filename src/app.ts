@@ -1,46 +1,44 @@
-// code goes here
+class Department {
+	// private id: string;
+	// private name: string;
+	private employees: string[] = [];
 
-const fun = (item: string): void => {
-	console.log(item);
-};
+	constructor(private name: string, private readonly id: string) {} // double init declaration shortcut
 
-fun('hello jonathan');
+	describe(this: Department): string {
+		return `Name: ${this.name}\nId: ${this.id}\n`; // must use 'this' to refer to current object
+	}
 
-const hobbies = [ 'sports', 'cookings' ];
-console.log(hobbies[0]);
+	addEmployee(employee: string) {
+		this.employees.push(employee);
+	}
 
-const activeHobbies = [ 'water boarding','hiking', ...hobbies ];
-console.log(activeHobbies);
+	printEmployeesInfo() {
+		console.log(this.employees.length);
+		console.log(this.employees);
+	}
+}
 
-const person = {
-	firstName: 'Jonathan',
-	age: 31
-};
+class ITDepartment extends Department {
+	admins: string[];
+	constructor(id: string, admins: string[]) {
+		super('IT', id);
+		this.admins = admins;
+	}
+}
 
-const copiedPerson = {
-	...person
-};
-copiedPerson.firstName = 'copied Jonathan';
+const itDep = new ITDepartment('12345', [ 'Jonathan', 'James' ]);
+console.log(itDep.admins, itDep.describe());
 
-console.log(person);
-console.log(copiedPerson);
+const firstDepo = new Department('Fire Department', '1234');
 
-const restFunction = (...args: number[]) => {
-	const result = args.reduce((total, currentValue) => {
-		return total + currentValue;
-	}, 0);
-	console.log(result);
-};
+// console.log(firstDepo.name);
 
-restFunction(1, 2, 3, 4, 5);
+console.log(firstDepo.describe());
 
-const [hobby1, hobby2, ...remainingHobbies] = activeHobbies;
-console.log(hobby1)
-console.log(hobby2)
-console.log(remainingHobbies)
+firstDepo.addEmployee('Jonathan');
+firstDepo.addEmployee('Jonah');
 
+firstDepo.printEmployeesInfo();
 
-const { firstName: personName, age } = person;
-
-console.log(personName)
-console.log(age)
+// firstDepo.employees.push('Anna'); // employees is private to the outside
