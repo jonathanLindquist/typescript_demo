@@ -1,44 +1,51 @@
-class Department {
-	// private id: string;
-	// private name: string;
-	private employees: string[] = [];
+interface Named {
+    readonly name: string;
+    outputName?: string; // optional
+}
 
-	constructor(private name: string, private readonly id: string) {} // double init declaration shortcut
+interface AnotherInterface {}
 
-	describe(this: Department): string {
-		return `Name: ${this.name}\nId: ${this.id}\n`; // must use 'this' to refer to current object
+//multiple interface extension
+interface Greetable extends Named, AnotherInterface {
+	greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+    name: string;
+    outputName: string;
+    age = 31;
+
+	constructor(name: string, outputName?: string) {
+		this.name = name;
+        this.outputName = outputName ? outputName : name
 	}
 
-	addEmployee(employee: string) {
-		this.employees.push(employee);
-	}
-
-	printEmployeesInfo() {
-		console.log(this.employees.length);
-		console.log(this.employees);
+	greet(phrase: string): void {
+		console.log(phrase);
 	}
 }
 
-class ITDepartment extends Department {
-	admins: string[];
-	constructor(id: string, admins: string[]) {
-		super('IT', id);
-		this.admins = admins;
-	}
+let user1: Greetable;
+
+user1 = new Person('Jonathan');
+user1.name;
+
+user1.greet("hi there, I'm ");
+
+// type AddFn = (n1: number, n2: number) => number;
+
+// let add: AddFn;
+
+// add = (n1: number, n2: number) => {
+// 	return n1 + n2;
+// };
+
+// Function interface
+interface AddFn {
+    (a: number, b: number): number;
 }
 
-const itDep = new ITDepartment('12345', [ 'Jonathan', 'James' ]);
-console.log(itDep.admins, itDep.describe());
-
-const firstDepo = new Department('Fire Department', '1234');
-
-// console.log(firstDepo.name);
-
-console.log(firstDepo.describe());
-
-firstDepo.addEmployee('Jonathan');
-firstDepo.addEmployee('Jonah');
-
-firstDepo.printEmployeesInfo();
-
-// firstDepo.employees.push('Anna'); // employees is private to the outside
+let add: AddFn;
+add = (n1: number, n2: number) => {
+    return n1 + n2;
+}
